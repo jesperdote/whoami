@@ -1,0 +1,175 @@
+:root {
+    --bg-color: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    --border-color: #333333;
+    --font-stack: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* CRT Scanline Effect Overlay */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    padding: 4rem 2rem;
+    z-index: 1;
+}
+
+/* Header Typography */
+header {
+    border-bottom: 2px solid var(--text-primary);
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Blinking Cursor */
+.cursor {
+    display: inline-block;
+    width: 18px;
+    height: 3rem;
+    background-color: var(--text-primary);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Section Styling */
+section {
+    margin-bottom: 4rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+h2::before {
+    content: "./";
+    color: var(--text-secondary);
+    margin-right: 0.5rem;
+}
+
+/* Tech Stack Grid */
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.terminal-card {
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.terminal-card:hover {
+    border-color: var(--text-primary);
+}
+
+.terminal-card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.terminal-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.terminal-card li::before {
+    content: "> ";
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--text-primary);
+    padding: 1rem 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    box-shadow: 4px 4px 0 var(--text-secondary);
+    transform: translate(-2px, -2px);
+}
+
+/* Footer */
+footer {
+    margin-top: 4rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}

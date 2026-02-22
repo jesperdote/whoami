@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  devops-profile:
+    build: .
+    ports:
+      - "8014:80"
+    container_name: devops-profile-container
+    
+    # Maps your local directory to the Nginx HTML folder.
+    # Any change you make to index.html or style.css locally 
+    # will reflect instantly in the browser upon refresh.
+    volumes:
+      - ./:/usr/share/nginx/html
