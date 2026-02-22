@@ -6,7 +6,7 @@
 (
     while true; do
         # Run uptime command and save to file
-        uptime > /usr/share/nginx/html/.uptime.txt
+        uptime > /usr/share/nginx/html/uptime.txt
         
         # Wait 5 seconds before updating again
         sleep 5
