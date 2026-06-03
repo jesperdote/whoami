@@ -8,6 +8,9 @@ COPY index.html /usr/share/nginx/html/index.html
 COPY style.css /usr/share/nginx/html/style.css
 COPY health /usr/share/nginx/html/health
 
+# Copy Nginx configuration
+COPY default.conf /etc/nginx/conf.d/default.conf
+
 # Copy the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 
