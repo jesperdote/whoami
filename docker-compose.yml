@@ -6,6 +6,12 @@ services:
     ports:
       - "8014:80"
     container_name: devops-profile-container
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     
     # Maps your local directory to the Nginx HTML folder.
     # Any change you make to index.html or style.css locally 
