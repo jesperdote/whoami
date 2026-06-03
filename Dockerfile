@@ -6,7 +6,7 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy HTML, CSS and healthcheck
 COPY index.html /usr/share/nginx/html/index.html
 COPY style.css /usr/share/nginx/html/style.css
-COPY health /usr/share/nginx/html/health
+COPY health.txt /usr/share/nginx/html/health.txt
 
 # Copy Nginx configuration
 COPY default.conf /etc/nginx/conf.d/default.conf
@@ -19,7 +19,7 @@ RUN chmod +x /entrypoint.sh
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost/health || exit 1
+  CMD curl -f http://localhost/health.txt || exit 1
 
 # Expose port 80
 EXPOSE 80
