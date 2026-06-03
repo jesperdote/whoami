@@ -7,7 +7,7 @@ services:
       - "8014:80"
     container_name: devops-profile-container
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      test: ["CMD", "curl", "-f", "http://localhost/health.txt"]
       interval: 30s
       timeout: 10s
       retries: 3
