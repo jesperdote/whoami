@@ -158,19 +158,8 @@
 
             <section id="recent">
                 <h2>Recent posts</h2>
-                <div class="post-list">
-                    <a href="https://infdxeta.info/blog/posts/the-deploy-that-kept-saying-done/" class="post-item">
-                        <span class="post-title">The deploy that kept saying done</span>
-                        <span class="post-desc">Moved this blog off Netlify to self-hosted: Jenkins splits the build (needs an amd64 agent) from the deploy (the BananaPi's armv7), behind a Cloudflare Tunnel.</span>
-                    </a>
-                    <a href="https://infdxeta.info/blog/posts/the-freeze-that-lied-about-its-alibi/" class="post-item">
-                        <span class="post-title">The freeze that lied about its alibi</span>
-                        <span class="post-desc">A ThinkPad kept hard-freezing mid-session with zero log trail. Traced through disabled kernel lockup watchdogs to a NULL-pointer crash in a touchscreen driver on resume.</span>
-                    </a>
-                    <a href="https://infdxeta.info/blog/posts/the-trackpads-triple-life/" class="post-item">
-                        <span class="post-title">The trackpad's triple life</span>
-                        <span class="post-desc">Wrote a Rust daemon for macOS-style three-finger drag on a Magic Trackpad, then had to make it survive the device switching between Bluetooth and USB mid-session.</span>
-                    </a>
+                <div class="post-list" id="recent-posts">
+                    <p class="post-loading">Loading recent posts...</p>
                 </div>
             </section>
 
@@ -212,6 +201,58 @@
 
         // Refresh every 5 seconds
         setInterval(fetchUptime, 5000);
+
+        async function fetchRecentPosts() {
+            const container = document.getElementById('recent-posts');
+            try {
+                // Same origin as this page (front-proxy routes /blog/ alongside /whoami/),
+                // so a root-relative path works regardless of where this page itself is served.
+                const response = await fetch('/blog/atom.xml');
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const xmlText = await response.text();
+                const xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                if (xml.querySelector('parsererror')) throw new Error('Feed parse error');
+
+                const entries = Array.from(xml.querySelectorAll('entry')).slice(0, 3);
+                if (entries.length === 0) throw new Error('No entries found');
+
+                container.innerHTML = '';
+                for (const entry of entries) {
+                    const title = entry.querySelector('title')?.textContent ?? '';
+                    const link = entry.querySelector('link')?.getAttribute('href') ?? '#';
+                    const desc = entry.querySelector('summary')?.textContent ?? '';
+
+                    // Built via DOM methods (textContent), not innerHTML - the feed is
+                    // same-origin but still externally fetched data, so it's not trusted
+                    // to be safely embeddable as raw HTML.
+                    const a = document.createElement('a');
+                    a.href = link;
+                    a.className = 'post-item';
+
+                    const titleSpan = document.createElement('span');
+                    titleSpan.className = 'post-title';
+                    titleSpan.textContent = title;
+
+                    const descSpan = document.createElement('span');
+                    descSpan.className = 'post-desc';
+                    descSpan.textContent = desc;
+
+                    a.appendChild(titleSpan);
+                    a.appendChild(descSpan);
+                    container.appendChild(a);
+                }
+            } catch (error) {
+                console.error('Error fetching recent posts:', error);
+                container.innerHTML = '';
+                const p = document.createElement('p');
+                p.className = 'post-loading';
+                p.textContent = 'Could not load recent posts.';
+                container.appendChild(p);
+            }
+        }
+
+        fetchRecentPosts();
     </script>
 </body>
 </html>

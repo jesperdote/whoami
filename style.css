@@ -256,6 +256,11 @@ h2::before {
     gap: 1rem;
 }
 
+.post-loading {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
 .post-item {
     display: block;
     border: 1px solid var(--border-color);
