@@ -4,48 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="klept.ico">
-    <title>DevOps Engineer | Profile</title>
+    <title>SRE | Profile</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="topnav">
+        <a href="#about">about</a>
+        <a href="#stack">stack</a>
+        <a href="#experience">experience</a>
+        <a href="#recent">posts</a>
+        <a href="#connect">connect</a>
+    </nav>
+
     <div class="container">
         <header>
             <h1>JESPER_DOTE<span class="cursor"></span></h1>
-            <div class="subtitle">Senior DevOps Engineer | SRE | Cloud Engineer</div>
+            <div class="subtitle">SRE</div>
         </header>
 
         <main>
-            <section>
+            <section id="about">
                 <h2>About</h2>
                 <p>
-                    Orchestrating chaos into stability. I specialize in building resilient infrastructure, 
-                    optimizing CI/CD pipelines, and ensuring 99.99% availability.
+                    Orchestrating chaos into stability. Currently an SRE at OpsWerks, improving
+                    observability and alerting across Kubernetes (EKS) and Nomad clusters — bare
+                    metal and AWS both. 13+ years across sysadmin, IT support, and DevOps before
+                    that, so the title on the door has changed more than the actual job.
                 </p>
             </section>
 
-            <section>
+            <section id="stack">
                 <h2>Stack</h2>
                 <div class="stack-grid">
                     <div class="terminal-card">
                         <h3>[ Infrastructure ]</h3>
                         <ul>
-                            <li>Kubernetes / Helm</li>
-                            <li>Terraform / Ansible</li>
-                            <li>AWS / GCP</li>
+                            <li>Kubernetes (EKS) / Nomad</li>
+                            <li>Envoy, traffic routing</li>
+                            <li>Terraform / Terragrunt / Ansible</li>
+                            <li>AWS (EKS, EC2, S3, IAM, Route 53)</li>
                         </ul>
                     </div>
                     <div class="terminal-card">
                         <h3>[ CI/CD & Observability ]</h3>
                         <ul>
-                            <li>GitHub Actions / Jenkins</li>
-                            <li>Prometheus / Grafana</li>
-                            <li>ELK Stack</li>
+                            <li>Jenkins / TeamCity</li>
+                            <li>Grafana / Prometheus / Thanos / AlertManager</li>
+                            <li>Datadog / Splunk / PagerDuty</li>
+                        </ul>
+                    </div>
+                    <div class="terminal-card">
+                        <h3>[ Automation ]</h3>
+                        <ul>
+                            <li>Bash/Python scripts that cut manual work, team-wide</li>
+                            <li>Runbook & alert-rule automation, fewer noisy pages</li>
+                            <li>Tooling that enabled faster critical-incident response</li>
+                            <li>Deployment tooling shipped and adopted across teams</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section>
+            <section id="homelab">
+                <h2>Homelab</h2>
+                <div class="stack-grid">
+                    <div class="terminal-card">
+                        <h3>[ Self-Hosted Infra ]</h3>
+                        <ul>
+                            <li>Jenkins, multi-arch build/deploy split</li>
+                            <li>Docker Compose on a BananaPi</li>
+                            <li>Cloudflare Tunnel / nginx reverse proxy</li>
+                        </ul>
+                    </div>
+                    <div class="terminal-card">
+                        <h3>[ Automation ]</h3>
+                        <ul>
+                            <li>Various automation</li>
+                            <li>Bash/Python glue scripts, end to end</li>
+                        </ul>
+                    </div>
+                    <div class="terminal-card">
+                        <h3>[ Debugging & Rust ]</h3>
+                        <ul>
+                            <li>Root-causing kernel/ACPI bugs via journalctl</li>
+                            <li>systemd-sleep hooks, udev rules</li>
+                            <li>uinput daemons, Grafana + Thanos alerting</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience">
+                <h2>Experience</h2>
+                <div class="job-list">
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-role">SRE, OpsWerks</span>
+                            <span class="job-dates">09/2023 – present · Mandaluyong, PH</span>
+                        </div>
+                        <p class="job-detail">
+                            Improving observability and alerting across EKS and Nomad clusters,
+                            bare metal and AWS both — refining alert rules, severity levels, and
+                            escalation policies to cut noise without losing coverage. Also
+                            supporting Envoy, resolving complex traffic routing issues.
+                            Infrastructure managed via Terraform and Terragrunt.
+                        </p>
+                        <div class="tag-group">
+                            <span class="tag">Terraform</span>
+                            <span class="tag">Terragrunt</span>
+                            <span class="tag">Kubernetes</span>
+                            <span class="tag">Nomad</span>
+                            <span class="tag">Envoy</span>
+                            <span class="tag">Datadog</span>
+                            <span class="tag">Splunk</span>
+                        </div>
+                    </div>
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-role">DevOps Engineer / Linux Administrator, Wonders Corporation</span>
+                            <span class="job-dates">03/2022 – 09/2023 · Pasig, PH</span>
+                        </div>
+                        <p class="job-detail">
+                            Built and maintained AWS infrastructure-as-code in Terraform, modernized
+                            aging Ansible playbooks for production deployment, and tightened the ELK
+                            stack for faster, more precise alerting.
+                        </p>
+                        <div class="tag-group">
+                            <span class="tag">Terraform</span>
+                            <span class="tag">Ansible</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">ELK Stack</span>
+                        </div>
+                    </div>
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-role">Senior IT Support Engineer (Linux/Windows), Wonders Corporation</span>
+                            <span class="job-dates">2019 – 03/2022 · Pasig, PH</span>
+                        </div>
+                        <p class="job-detail">
+                            Ran AWS and Google Workspace administration, stood up internal tooling
+                            (Nextcloud, PXE/kickstart imaging), and automated workstation deployment
+                            with Ansible for the wider Ops team.
+                        </p>
+                        <div class="tag-group">
+                            <span class="tag">AWS</span>
+                            <span class="tag">Ansible</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">Grafana</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="recent">
+                <h2>Recent posts</h2>
+                <div class="post-list">
+                    <a href="https://infdxeta.info/blog/posts/the-deploy-that-kept-saying-done/" class="post-item">
+                        <span class="post-title">The deploy that kept saying done</span>
+                        <span class="post-desc">Moved this blog off Netlify to self-hosted: Jenkins splits the build (needs an amd64 agent) from the deploy (the BananaPi's armv7), behind a Cloudflare Tunnel.</span>
+                    </a>
+                    <a href="https://infdxeta.info/blog/posts/the-freeze-that-lied-about-its-alibi/" class="post-item">
+                        <span class="post-title">The freeze that lied about its alibi</span>
+                        <span class="post-desc">A ThinkPad kept hard-freezing mid-session with zero log trail. Traced through disabled kernel lockup watchdogs to a NULL-pointer crash in a touchscreen driver on resume.</span>
+                    </a>
+                    <a href="https://infdxeta.info/blog/posts/the-trackpads-triple-life/" class="post-item">
+                        <span class="post-title">The trackpad's triple life</span>
+                        <span class="post-desc">Wrote a Rust daemon for macOS-style three-finger drag on a Magic Trackpad, then had to make it survive the device switching between Bluetooth and USB mid-session.</span>
+                    </a>
+                </div>
+            </section>
+
+            <section id="connect">
                 <h2>Connect</h2>
                 <div class="btn-group">
                     <a href="https://github.com/jesperdote" class="btn">GitHub</a>
