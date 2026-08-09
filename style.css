@@ -52,6 +52,14 @@ body {
     .topnav a {
         font-size: 0.8rem;
     }
+
+    /* Nav wraps to 2 lines at this width, so it's taller than the desktop
+       single-line bar - scroll-padding-top needs to grow to match, or an
+       anchor jump (tapping a nav link) lands with the section heading
+       hidden behind the sticky nav instead of clear of it. */
+    html {
+        scroll-padding-top: 6.5rem;
+    }
 }
 
 .topnav a {
