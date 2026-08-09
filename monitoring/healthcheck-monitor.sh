@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-URL="https://infdxeta.info/cooking/health.txt"
+URL="https://infdxeta.info/whoami/health.txt"
 CONTAINER_NAME="devops-profile-container"
 CHECK_INTERVAL=60 # seconds
 

@@ -1,6 +1,6 @@
 # whoami
 
-DevOps/SRE portfolio page, self-hosted at [infdxeta.info/cooking/](https://infdxeta.info/cooking/).
+DevOps/SRE portfolio page, self-hosted at [infdxeta.info/whoami/](https://infdxeta.info/whoami/).
 
 Plain HTML/CSS/JS, no build step - a custom `nginx:alpine` image serves it directly.
 
@@ -12,7 +12,7 @@ there's no cross-arch build step needed (the Dockerfile builds fine directly on 
 BananaPi's armv7), so it's a single-stage pipeline: pull, `docker-compose -f
 docker-compose.prod.yml up -d --build --force-recreate`.
 
-A front-proxy (`klept-lab/proj`, `front/nginx/default.conf`) routes `/cooking/` to this
+A front-proxy (`klept-lab/proj`, `front/nginx/default.conf`) routes `/whoami/` to this
 container's published port (8014), and a Cloudflare Tunnel on the BananaPi exposes it
 publicly.
 
