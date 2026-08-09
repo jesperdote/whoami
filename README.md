@@ -20,6 +20,25 @@ publicly.
 `monitoring/` runs a host-level systemd watchdog that restarts the container if
 `/health.txt` stops responding - both predate the Jenkins pipeline and are left in place.
 
+**`monitoring/` is not deployed by Jenkins - it requires a manual step.** The `deploy-whoami`
+pipeline only ever touches the container (`git pull` + `docker-compose up`); it never copies
+`monitoring/healthcheck-monitor.sh` to `/usr/local/bin/` or `monitoring/devops-profile-healthcheck.service`
+to `/etc/systemd/system/` on the BananaPi, because the `jenkins` user has no sudo there and
+those paths need root. **Any edit to either file in this repo silently does not reach the
+running watchdog until someone manually re-copies it and restarts the service** - this already
+caused a real incident once (the watchdog kept checking a URL from before a route rename,
+404ing forever, restarting a perfectly healthy container every ~90s). After editing either
+file, on the BananaPi:
+
+```bash
+sudo cp monitoring/healthcheck-monitor.sh /usr/local/bin/healthcheck-monitor.sh
+sudo chmod +x /usr/local/bin/healthcheck-monitor.sh
+# only if the .service file itself changed:
+sudo cp monitoring/devops-profile-healthcheck.service /etc/systemd/system/devops-profile-healthcheck.service
+sudo systemctl daemon-reload
+sudo systemctl restart devops-profile-healthcheck.service
+```
+
 ## Local dev
 
 ```bash
