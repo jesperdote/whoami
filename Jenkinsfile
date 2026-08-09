@@ -1,3 +1,13 @@
+def notifySlack(String status, String emoji) {
+    withCredentials([string(credentialsId: 'slack-webhook-url', variable: 'SLACK_WEBHOOK_URL')]) {
+        sh """
+            curl -s -X POST -H 'Content-type: application/json' \\
+                --data '{"text":"${emoji} *${env.JOB_NAME}* #${env.BUILD_NUMBER} ${status}\\n${env.BUILD_URL}"}' \\
+                "\$SLACK_WEBHOOK_URL"
+        """
+    }
+}
+
 pipeline {
     agent { label 'bananapi' }
 
@@ -11,6 +21,12 @@ pipeline {
     }
 
     stages {
+        stage('Notify Start') {
+            steps {
+                script { notifySlack('started', ':large_blue_circle:') }
+            }
+        }
+
         // No cross-arch build needed here (unlike blog/zola) - the Dockerfile is a
         // plain nginx:alpine build that runs fine directly on the BananaPi's armv7,
         // so build and deploy both happen in a single stage on that agent.
@@ -25,8 +41,12 @@ pipeline {
     }
 
     post {
+        success {
+            script { notifySlack('succeeded', ':white_check_mark:') }
+        }
         failure {
             echo "Deploy failed — check docker compose logs on the BananaPi."
+            script { notifySlack('failed', ':x:') }
         }
     }
 }
