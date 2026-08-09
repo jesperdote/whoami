@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  devops-profile:
+    build: .
+    ports:
+      - "8014:80"
+    container_name: devops-profile-container
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health.txt"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
