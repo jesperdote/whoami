@@ -253,6 +253,18 @@
         }
 
         fetchRecentPosts();
+
+        // The sticky nav's height varies (wraps to 2 lines on narrow viewports,
+        // font rendering differs across devices) - measuring it directly instead
+        // of guessing a fixed rem value in CSS means anchor jumps always clear it.
+        function setNavHeight() {
+            const nav = document.querySelector('.topnav');
+            if (nav) {
+                document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 'px');
+            }
+        }
+        setNavHeight();
+        window.addEventListener('resize', setNavHeight);
     </script>
 </body>
 </html>

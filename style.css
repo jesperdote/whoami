@@ -11,7 +11,11 @@
 }
 
 html {
-    scroll-padding-top: 4rem;
+    /* --nav-height is set by JS from the topnav's actual rendered height -
+       this fallback only applies for the brief moment before that JS runs,
+       or if JS is disabled. +1rem so headings get breathing room instead of
+       landing flush against the nav's border. */
+    scroll-padding-top: calc(var(--nav-height, 4rem) + 1rem);
 }
 
 body {
@@ -45,20 +49,12 @@ body {
 
 @media (max-width: 480px) {
     .topnav {
-        gap: 0.5rem 1rem;
+        gap: 0.4rem 0.75rem;
         padding: 0.75rem 1rem;
     }
 
     .topnav a {
-        font-size: 0.8rem;
-    }
-
-    /* Nav wraps to 2 lines at this width, so it's taller than the desktop
-       single-line bar - scroll-padding-top needs to grow to match, or an
-       anchor jump (tapping a nav link) lands with the section heading
-       hidden behind the sticky nav instead of clear of it. */
-    html {
-        scroll-padding-top: 6.5rem;
+        font-size: 0.7rem;
     }
 }
 
