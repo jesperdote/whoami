@@ -1,8 +1,9 @@
-def notifySlack(String status, String emoji) {
+def notifySlack(String status, String emoji, String url = '') {
     withCredentials([string(credentialsId: 'slack-webhook-url', variable: 'SLACK_WEBHOOK_URL')]) {
+        def extra = url ? "\\n${url}" : ''
         sh """
             curl -s -X POST -H 'Content-type: application/json' \\
-                --data '{"text":"${emoji} *${env.JOB_NAME}* #${env.BUILD_NUMBER} ${status}\\n${env.BUILD_URL}"}' \\
+                --data '{"text":"${emoji} *${env.JOB_NAME}* #${env.BUILD_NUMBER} ${status}\\n${env.BUILD_URL}${extra}"}' \\
                 "\$SLACK_WEBHOOK_URL"
         """
     }
@@ -42,7 +43,7 @@ pipeline {
 
     post {
         success {
-            script { notifySlack('succeeded', ':white_check_mark:') }
+            script { notifySlack('succeeded', ':white_check_mark:', 'https://infdxeta.info/whoami/') }
         }
         failure {
             echo "Deploy failed — check docker compose logs on the BananaPi."
